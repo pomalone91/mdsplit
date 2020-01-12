@@ -6,7 +6,7 @@ namespace mdsplit {
     public class FileReader {
 
         private string filepath;
-        private string contents;
+        public string contents;
 
         public FileReader(string filepath) {
             this.filepath = filepath;
@@ -19,7 +19,7 @@ namespace mdsplit {
             try {
                 using (StreamReader sr = new StreamReader(filepath)) {
                     contents = sr.ReadToEnd();
-                    Console.WriteLine(contents);
+                    //Console.WriteLine(contents);
                 }
             } catch (IOException e) {
                 Console.WriteLine("Could not read file");
