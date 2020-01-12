@@ -16,5 +16,9 @@ namespace mdsplit {
         public string articleByIndex(int i) {
             return articles[i];
         }
+
+        public string[] getArticles() {
+            return articles;
+        }
     }
 }

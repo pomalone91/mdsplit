@@ -1,4 +1,4 @@
-﻿// Run using this in custom config:      /Users/paulmalone/Documents/Journal/index.md
+﻿
 using System;
 using System.IO;
 namespace mdsplit {

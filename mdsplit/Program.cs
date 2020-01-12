@@ -1,4 +1,5 @@
-﻿using System;
+﻿// Run using this in custom config:      /Users/paulmalone/Documents/Journal/index.md
+using System;
 
 namespace mdsplit {
     class MainClass {
@@ -8,6 +9,12 @@ namespace mdsplit {
                 FileReader fr = new FileReader(args[0]);
                 Splitter sp = new Splitter(fr);
                 Console.WriteLine(sp.articleByIndex(0));
+                string[] articles = sp.getArticles();
+
+                foreach (string article in articles) {
+                    Console.WriteLine(article);
+                    Console.WriteLine("------------------------------------");
+                }
             } else {
                 Console.WriteLine("Could not read file");
             }
