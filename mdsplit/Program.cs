@@ -1,4 +1,4 @@
-﻿// Run using this in custom config:      /Users/paulmalone/Documents/Journal/index.md
+﻿// Run using this in custom config:      /Users/paulmalone/Documents/Journal/test.md
 using System;
 
 namespace mdsplit {
@@ -12,7 +12,7 @@ namespace mdsplit {
                 string[] articles = sp.getArticles();
 
                 foreach (string article in articles) {
-                    Console.WriteLine(article);
+                    Console.WriteLine("'{0}'", article);
                     Console.WriteLine("------------------------------------");
                 }
             } else {

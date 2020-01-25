@@ -1,5 +1,7 @@
-﻿using System;
+﻿// Run using this in custom config:      /Users/paulmalone/Documents/Journal/test.md
+using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace mdsplit {
     public class Splitter {
@@ -7,9 +9,17 @@ namespace mdsplit {
         private string[] articles;
         private FileReader fileReader;
 
+        // Replace ^ with \n so it's easier to parse \n
+        
+        private string pattern = "(\n# .*)"; // Matches lines with one # at the beginning
+
         public Splitter(FileReader fileReader) {
             this.fileReader = fileReader;
-            this.articles = this.fileReader.contents.Split('#');
+            string lineStart = "^";
+            string replacedContents = Regex.Replace(this.fileReader.contents, lineStart, "\n");
+            
+            //Console.WriteLine(fileReader.contents);
+            this.articles = Regex.Split(replacedContents, pattern);
         }
 
         // Function that actually splits everything
