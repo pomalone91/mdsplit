@@ -28,7 +28,7 @@ namespace mdsplit {
             for (int i = 0; i < h1List.Count; i++) {
                 if (h1List[i] != "") {
                     if (h1List[i].StartsWith("\n#")) {
-                        fileList.Add(new File(h1List[i].Substring(1), h1List[i+1]));
+                        fileList.Add(new File(h1List[i].Substring(3), h1List[i+1]));
                         h1List[i] += h1List[i + 1];
                         h1List[i + 1] = "";
                     }
