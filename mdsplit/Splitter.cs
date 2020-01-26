@@ -6,7 +6,7 @@ using System.Text.RegularExpressions;
 namespace mdsplit {
     public class Splitter {
         // Splitter is going to have a list to store the results of the split.
-        private string[] articles;
+        private List<string> articles;
         private FileReader fileReader;
 
         // Replace ^ with \n so it's easier to parse \n
@@ -19,22 +19,28 @@ namespace mdsplit {
             string replacedContents = Regex.Replace(this.fileReader.contents, lineStart, "\n");
 
             //Console.WriteLine(fileReader.contents);
-            string[] splitH1s = Regex.Split(replacedContents, pattern);
+            List<string> h1List = new List<string>(Regex.Split(replacedContents, pattern));
 
-            // TODO - append H1s back onto their bodies
             // 1. If first letter is #
             // 2. append i+1 to i
             // Find next #
-            for (int i = 0; i < splitH1s.Length; i++) {
-                if (splitH1s[i] != "") {
-                    if (splitH1s[i].StartsWith("\n#")) {
-                        splitH1s[i] += splitH1s[i + 1];
-                        splitH1s[i + 1] = "";
+            for (int i = 0; i < h1List.Count; i++) {
+                if (h1List[i] != "") {
+                    if (h1List[i].StartsWith("\n#")) {
+                        h1List[i] += h1List[i + 1];
+                        h1List[i + 1] = "";
                     }
                 }
             }
 
-            this.articles = splitH1s;
+            // Loop through list to remove blank entries
+            for (int i = 0; i < h1List.Count; i++) {
+                if (h1List[i] == "") {
+                    h1List.RemoveAt(i);
+                }
+            }
+
+            this.articles = h1List;
         }
 
         // Function that actually splits everything
@@ -42,7 +48,7 @@ namespace mdsplit {
             return articles[i];
         }
 
-        public string[] getArticles() {
+        public List<string> getArticles() {
             return articles;
         }
     }

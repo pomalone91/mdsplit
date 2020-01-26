@@ -7,11 +7,9 @@ namespace mdsplit {
             // Make a new file reader and read in the file
             if (args.Length > 0) {
                 FileReader fr = new FileReader(args[0]);
-                Splitter sp = new Splitter(fr);
-                Console.WriteLine(sp.articleByIndex(0));
-                string[] articles = sp.getArticles();
+                Splitter sp = new Splitter(fr);                
 
-                foreach (string article in articles) {
+                foreach (string article in sp.getArticles()) {
                     Console.WriteLine("'{0}'", article);
                     Console.WriteLine("------------------------------------");
                 }
