@@ -17,9 +17,24 @@ namespace mdsplit {
             this.fileReader = fileReader;
             string lineStart = "^";
             string replacedContents = Regex.Replace(this.fileReader.contents, lineStart, "\n");
-            
+
             //Console.WriteLine(fileReader.contents);
-            this.articles = Regex.Split(replacedContents, pattern);
+            string[] splitH1s = Regex.Split(replacedContents, pattern);
+
+            // TODO - append H1s back onto their bodies
+            // 1. If first letter is #
+            // 2. append i+1 to i
+            // Find next #
+            for (int i = 0; i < splitH1s.Length; i++) {
+                if (splitH1s[i] != "") {
+                    if (splitH1s[i].StartsWith("\n#")) {
+                        splitH1s[i] += splitH1s[i + 1];
+                        splitH1s[i + 1] = "";
+                    }
+                }
+            }
+
+            this.articles = splitH1s;
         }
 
         // Function that actually splits everything
