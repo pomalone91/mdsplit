@@ -6,11 +6,12 @@ namespace mdsplit {
         public static void Main(string[] args) {
             // Make a new file reader and read in the file
             if (args.Length > 0) {
-                FileReader fr = new FileReader(args[0]);
-                Splitter sp = new Splitter(fr);                
+                File file = new File(args[0]);
+                Splitter sp = new Splitter(file);                
 
-                foreach (string article in sp.getArticles()) {
-                    Console.WriteLine("'{0}'", article);
+                foreach (File f in sp.getArticles()) {
+                    Console.WriteLine(f.filename);
+                    Console.WriteLine(f.contents);
                     Console.WriteLine("------------------------------------");
                 }
             } else {
