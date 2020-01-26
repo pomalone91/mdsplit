@@ -14,6 +14,8 @@ namespace mdsplit {
                     Console.WriteLine(f.contents);
                     Console.WriteLine("------------------------------------");
                 }
+
+                sp.getArticles()[1].write("/Users/paulmalone/Documents/Journal/", ".md");
             } else {
                 Console.WriteLine("Could not read file");
             }

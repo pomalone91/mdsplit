@@ -31,8 +31,9 @@ namespace mdsplit {
         }
 
         // Writes a given string to a file
-        public void write(string contents) {
-
+        public void write(string dir, string ext) {
+            this.filepath = dir + filename + ext;
+            System.IO.File.WriteAllText(filepath, filename + contents);
         }
 
         // Function to read in a file at a given path
