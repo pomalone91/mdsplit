@@ -44,5 +44,9 @@ namespace mdsplit {
         public List<File> getArticles() {
             return fileList;
         }
+
+        public int count() {
+            return fileList.Count;
+        }
     }
 }

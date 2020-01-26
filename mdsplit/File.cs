@@ -18,7 +18,7 @@ namespace mdsplit {
         // Init file to write with contents
         public File(string filename, string contents) {
             this.filename = filename;
-            this.contents = contents;
+            this.contents = "#" + filename + contents;
         }
 
         // Returns contents of the file
@@ -31,9 +31,28 @@ namespace mdsplit {
         }
 
         // Writes a given string to a file
-        public void write(string dir, string ext) {
-            this.filepath = dir + filename + ext;
-            System.IO.File.WriteAllText(filepath, filename + contents);
+        public void write(string topDir, string ext) {
+            this.filepath = topDir + filename + ext;
+            //System.IO.File.WriteAllText(filepath, filename + contents);
+
+            // TODO - Get this to fill in journal heirarchy when writting files
+            DateTime date = DateTime.Parse(filename);
+            string month = date.ToString("MMMM");
+            int year = date.Year;
+            string day = date.ToString("dd");
+
+            // TODO - Check if year folder exists, if not make it
+            string yearFolder = Path.Combine(topDir, year.ToString());
+            Directory.CreateDirectory(yearFolder);
+
+            // TODO - Check if month folder exists, if not make it
+            string monthFolder = Path.Combine(yearFolder, month);
+            Directory.CreateDirectory(monthFolder);
+
+            // TODO - write to appropriate month folder
+            string filePath = Path.Combine(monthFolder, day + ext);
+            System.IO.File.WriteAllText(filePath, contents);
+
         }
 
         // Function to read in a file at a given path
